@@ -1,0 +1,1015 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    /* Cores principais */
+    --cor-principal: #008293;
+    --cor-principal-hover: #006a7a;
+    --cor-secundaria: #6c757d;
+    --cor-disponivel: #4caf50;
+    --cor-vendido: #f44336;
+    --cor-indisponivel: #f44336;
+    --cor-background: #f5f5f5;
+    --cor-texto-principal: #333;
+    --cor-texto-secundario: #666;
+    --cor-texto-claro: #999;
+    --cor-borda: #ddd;
+    --cor-fundo: #f8f9fa;
+    --cor-branco: #fff;
+    
+    /* Sombras */
+    --sombra-normal: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --sombra-hover: 0 6px 10px rgba(0, 0, 0, 0.15);
+    --sombra-suave: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --sombra-media: 0 6px 20px rgba(0, 0, 0, 0.12);
+    --border-radius: 8px;
+    --cor-principal-transparente: rgba(0, 130, 147, 0.1);
+    --cor-vendido-transparente: rgba(244, 67, 54, 0.1);
+    --cor-disponivel-texto: #388e3c;
+    --cor-vendido-texto: #c2185b;
+    --cor-texto-muted: #6c757d;
+    --sombra-interna: inset 0 2px 4px rgba(0,0,0,0.06);
+    
+    /* Variáveis adicionais necessárias */
+    --primary-color: #008293; /* Mesmo que cor-principal */
+    --secondary-color: #6c757d; /* Mesmo que cor-secundaria */
+    --accent-color: #ff5722; /* Cor de destaque */
+    --shadow-light: 0 2px 5px rgba(0,0,0,0.1);
+    --shadow-medium: 0 4px 8px rgba(0,0,0,0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: '', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    line-height: 1.7;
+    font-weight: 300;
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+body.modal-aberto {
+    overflow: hidden; /* Impede scroll da página quando modal está aberto */
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+}
+
+/* Adicionando animações */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+header {
+    background: linear-gradient(135deg, var(--cor-principal), var(--cor-principal-hover));
+    color: var(--cor-branco);
+    padding: 2rem 1rem;
+    margin-bottom: 3rem;
+    box-shadow: var(--sombra-suave);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito decorativo para o header */
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    pointer-events: none;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeInDown 1.2s ease-out forwards;
+}
+
+.logo {
+    height: 150px; /* Aumentando ainda mais o tamanho da logo */
+    width: auto;
+    margin-right: 20px; /* Espaço entre a logo e o título */
+    filter: brightness(0) invert(1); /* Isso transforma a logo para branco */
+    transform-origin: center;
+    animation: pulse 3s ease-in-out infinite;
+    animation-delay: 1.2s; /* Começar após a animação inicial */
+}
+
+header h2 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.8em; /* Aumentando um pouco o tamanho do título */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2); /* Adicionando sombra sutil ao texto */
+}
+
+main {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    min-height: 60vh; /* Altura mínima para o conteúdo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.filtros {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.filtros button {
+    background-color: var(--cor-branco);
+    border: 1px solid var(--cor-borda);
+    color: var(--cor-texto-claro);
+    padding: 0.8rem 1.8rem;
+    margin: 0.3rem 0.5rem;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    box-shadow: var(--sombra-suave);
+}
+
+.filtros button:hover {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-media);
+}
+
+.filtros button.ativo {
+    background-color: var(--cor-principal);
+    color: var(--cor-branco);
+    border-color: var(--cor-principal);
+    font-weight: 600;
+    box-shadow: var(--sombra-media);
+}
+
+/* Estilo para um contador de plantas ou estatísticas */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 2rem auto;
+    flex-wrap: wrap;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.stat-item {
+    background-color: var(--cor-branco);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    width: 200px;
+    text-align: center;
+    box-shadow: var(--sombra-suave);
+    border-top: 4px solid var(--cor-principal);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-media);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--cor-principal);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: var(--cor-texto-secundario);
+    font-size: 1rem;
+}
+
+/* Melhorar a exibição das plantas */
+.plantas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.8s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.planta {
+    background-color: var(--cor-branco);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--sombra-suave);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    opacity: 0; /* Inicialmente invisível para animação de scroll */
+    transform: translateY(20px); /* Inicialmente deslocado para animação */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.planta.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.planta:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--sombra-media);
+}
+
+.planta img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.planta.imagem-erro img {
+    height: 200px; /* Altura fixa para erro */
+    object-fit: contain; /* Para mostrar ícone de erro se houver */
+}
+
+.planta-info {
+    padding: 1.2rem;
+    text-align: center;
+}
+
+.planta-info h3 {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+    color: var(--cor-principal);
+    font-weight: 600;
+}
+
+.planta-status {
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border-radius: 50px; /* Formato de pílula */
+    font-size: 0.85rem;
+    display: inline-block;
+    color: var(--cor-branco);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.planta.disponivel .planta-status {
+    background-color: var(--cor-disponivel);
+}
+
+.planta.vendido {
+    /* Não precisa mais de opacidade aqui, o overlay cuida disso */
+}
+
+.planta.vendido::after {
+    content: 'VENDIDO';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    background-color: rgba(231, 76, 60, 0.85); /* Um pouco mais opaco */
+    color: var(--cor-branco);
+    padding: 0.8rem 2.5rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    border-radius: var(--border-radius);
+    z-index: 10;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Esconde plantas que não correspondem ao filtro (sem animação) */
+.planta.escondido {
+    display: none;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: none;
+}
+
+
+/* --- Estilos do Modal --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.visivel {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-container {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--sombra-normal);
+    transition: transform 0.3s ease;
+    transform: scale(0.9);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay.visivel .modal-container {
+    transform: scale(1);
+}
+
+.modal-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--cor-texto-principal);
+    flex-grow: 1;
+}
+
+.modal-fechar {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--cor-texto-secundario);
+    transition: color 0.2s ease;
+}
+
+.modal-fechar:hover {
+    color: var(--cor-texto-principal);
+}
+
+.modal-conteudo {
+    position: relative;
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-imagem {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+}
+
+.info-loja {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-top: 1px solid #eee;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.info-loja.visivel {
+    transform: translateY(0);
+}
+
+.info-loja h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--cor-texto-principal);
+}
+
+.info-loja p {
+    margin-bottom: 15px;
+    color: var(--cor-texto-secundario);
+}
+
+.fechar-info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--cor-texto-secundario);
+}
+
+.area-loja {
+    position: absolute;
+    cursor: pointer;
+    border: 2px solid transparent;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.area-loja:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-color: var(--cor-principal);
+}
+
+.area-loja.disponivel {
+    border-color: var(--cor-disponivel);
+}
+
+.area-loja.indisponivel {
+    border-color: var(--cor-indisponivel);
+}
+
+/* Painel lateral para botões de lojas */
+.painel-lateral {
+    width: 200px; /* Mais compacto */
+    background: #fff;
+    padding: 15px;
+    border-left: 1px solid #dee2e6;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.painel-lateral h4 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 1.2rem;
+    color: var(--cor-principal);
+    font-weight: 600;
+}
+
+.botoes-lojas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.btn-loja {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid #e9ecef;
+    background-color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease-out;
+    text-align: left;
+    position: relative;
+}
+
+.btn-loja::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.btn-loja.disponivel::before {
+    background-color: var(--cor-disponivel);
+}
+
+.btn-loja.vendido::before {
+    background-color: var(--cor-vendido);
+}
+
+.btn-loja:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    border-color: #ced4da;
+}
+
+.btn-loja.selecionado {
+    outline: none;
+    transform: translateY(0);
+    font-weight: 600;
+    box-shadow: var(--sombra-interna);
+}
+
+.btn-loja.disponivel.selecionado {
+    background-color: var(--cor-principal-transparente);
+    border-color: var(--cor-principal);
+    color: var(--cor-principal);
+}
+
+/* Ajuste no container do modal para acomodar o painel lateral */
+.modal-conteudo-container {
+    display: flex;
+    flex-direction: row;
+    max-height: calc(90vh - 60px);
+    width: 100%;
+}
+
+.imagem-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-imagem {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+#modal-imagem.zoom {
+    transform: scale(1.5);
+    cursor: zoom-out;
+}
+
+/* Responsividade para o modal */
+@media (max-width: 768px) {
+    .modal-conteudo-container {
+        flex-direction: column;
+        height: calc(100% - 60px);
+        overflow: hidden;
+    }
+
+    .imagem-container {
+        width: 100%;
+        height: 50%;
+        flex-shrink: 0;
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    #modal-imagem {
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .painel-lateral {
+        width: 100%;
+        max-height: 50%;
+        flex-grow: 1;
+        overflow-y: hidden;
+        padding: 0 1rem 1rem 1rem;
+        border-top: 1px solid var(--cor-borda);
+    }
+
+    .painel-lateral h4 {
+        margin-top: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .botoes-lojas-container {
+        max-height: calc(100% - 50px);
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-container {
+        width: 95%;
+        height: 90vh;
+        max-height: 90vh;
+    }
+
+    .modal-header h3 {
+        font-size: 1.1em;
+    }
+
+    .imagem-container {
+        height: 45%;
+    }
+
+    .painel-lateral {
+        max-height: 55%;
+    }
+
+    .btn-loja {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .painel-lateral h4 {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 360px) {
+    .painel-lateral {
+        min-height: 180px;
+        padding: 8px;
+    }
+    
+    .botoes-lojas-container {
+        gap: 5px;
+    }
+    
+    .btn-loja {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .painel-lateral h4 {
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+}
+
+footer {
+    background-color: var(--cor-secundaria); /* Cor secundária para o footer */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2rem;
+    }
+    header h2 {
+        font-size: 1.1rem;
+    }
+    .plantas-container {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin: 0 auto;
+        max-width: 95%;
+    }
+    .filtros button {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    .logo {
+        height: 120px;
+    }
+    .stat-item {
+        width: 180px;
+        padding: 1.2rem;
+    }
+    main {
+        padding: 0 1.2rem;
+    }
+    .planta {
+        transition: transform 0.2s ease;
+    }
+    .planta:hover {
+        transform: translateY(-3px) scale(1.01);
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 1.5rem 0.8rem;
+    }
+    header h1 {
+        font-size: 1.8rem;
+    }
+    header h2 {
+        font-size: 1rem;
+    }
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    .logo {
+        height: 90px;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .plantas-container {
+        grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+        gap: 1.2rem;
+        margin-top: 1rem;
+        max-width: 100%;
+    }
+    .filtros {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+    }
+    .filtros button {
+        width: calc(50% - 1rem);
+        margin: 0.3rem;
+        padding: 0.8rem 0.5rem;
+        font-size: 0.85rem;
+    }
+    .planta.vendido::after {
+        font-size: 1.2rem;
+        padding: 0.6rem 1.5rem;
+    }
+    .planta-info {
+        padding: 0.8rem;
+    }
+    .planta-info h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    .stat-item {
+        width: 140px;
+        padding: 1rem;
+    }
+    .stat-number {
+        font-size: 1.8rem;
+    }
+    .stat-label {
+        font-size: 0.9rem;
+    }
+    main {
+        padding: 0 0.8rem;
+    }
+    .btn-voltar {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    .modal-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    /* Melhorias no modal para mobile */
+    .modal-container {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 0;
+    }
+    
+    #modal-imagem {
+        max-height: 45vh;
+    }
+    
+    .painel-lateral {
+        padding: 10px;
+    }
+    
+    .stats-container {
+        gap: 15px;
+        margin: 1.5rem auto;
+    }
+}
+
+/* Adicionar regras para telas muito pequenas */
+@media (max-width: 360px) {
+    header {
+        padding: 1.2rem 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .logo {
+        height: 75px;
+    }
+    header h2 {
+        font-size: 0.85rem;
+    }
+    .stats-container {
+        gap: 8px;
+        margin: 1rem auto;
+    }
+    .stat-item {
+        width: 110px;
+        padding: 0.7rem;
+    }
+    .stat-number {
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
+    }
+    .stat-label {
+        font-size: 0.75rem;
+    }
+    .planta-info h3 {
+        font-size: 0.95rem;
+    }
+    .planta-status {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.7rem;
+    }
+    .modal-container {
+        max-width: 100%;
+    }
+    .modal-conteudo-container {
+        max-height: calc(100vh - 50px);
+    }
+    .btn-loja {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+    .painel-lateral h4 {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+    }
+    .filtros button {
+        width: calc(50% - 0.6rem);
+        margin: 0.2rem;
+        padding: 0.7rem 0.4rem;
+        font-size: 0.8rem;
+    }
+    main {
+        padding: 0 0.5rem;
+    }
+    .mensagem-desenvolvimento h4 {
+        font-size: 1.4rem;
+    }
+    .mensagem-desenvolvimento p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Adicionar regras para dispositivos ainda menores */
+@media (max-width: 320px) {
+    header {
+        padding: 1rem 0.3rem;
+    }
+    .logo {
+        height: 65px;
+    }
+    .stat-item {
+        width: 100px;
+        padding: 0.6rem;
+    }
+    .filtros button {
+        width: 100%;
+        margin: 0.2rem 0;
+    }
+    .planta-info h3 {
+        font-size: 0.9rem;
+    }
+    .modal-header h3 {
+        font-size: 1rem;
+    }
+    .painel-lateral h4 {
+        font-size: 0.8rem;
+    }
+}
+
+/* Estilo para o botão de voltar */
+.btn-voltar {
+    background-color: var(--cor-principal);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-voltar:hover {
+    background-color: var(--cor-principal-hover);
+    transform: translateY(-2px);
+}
+
+.btn-voltar:active {
+    transform: translateY(0);
+}
+
+/* Estilo para destacar a loja quando clicada */
+.area-loja.ativa {
+    border-color: var(--cor-principal);
+    background-color: rgba(0, 130, 147, 0.3);
+    box-shadow: 0 0 15px rgba(0, 130, 147, 0.5);
+}
+
+/* Estilo para mensagem de desenvolvimento */
+.mensagem-desenvolvimento {
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: var(--sombra-media);
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.icone-construcao {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.mensagem-desenvolvimento h4 {
+    color: var(--cor-principal);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.mensagem-desenvolvimento p {
+    color: var(--cor-texto-secundario);
+    margin-bottom: 1.5rem;
+}
+
+.info-loja-basica {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: left;
+    margin-top: 1rem;
+}
+
+.info-loja-basica p {
+    margin: 0.5rem 0;
+    line-height: 1.4;
+}
+
+.info-loja-basica strong {
+    color: var(--cor-texto-principal);
+}
+
+.btn-loja.garagem {
+    position: relative;
+    background-color: rgba(78, 78, 78, 0.07);
+    border-color: #c1c1c1;
+}
+
+.btn-loja.garagem::before {
+    background-color: #757575;
+}
+
+.btn-loja.garagem.selecionado {
+    background-color: rgba(78, 78, 78, 0.15);
+    border-color: #757575;
+    color: #555;
+}
+
+.btn-loja.garagem:hover {
+    background-color: rgba(78, 78, 78, 0.12);
+    border-color: #999;
+}
+
